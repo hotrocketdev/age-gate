@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hot Rocket Age Gate - Preview</title>
+    <style>
+        /* Demo Page Styles */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .demo-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 60px 20px;
+            text-align: center;
+            color: white;
+        }
+
+        .demo-content h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+
+        .demo-content p {
+            font-size: 20px;
+            opacity: 0.9;
+        }
+
+        .demo-controls {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            z-index: 999998;
+            max-width: 300px;
+        }
+
+        .demo-controls h3 {
+            margin-top: 0;
+            color: #ff6b35;
+        }
+
+        .demo-controls label {
+            display: block;
+            margin: 15px 0 5px;
+            font-weight: 600;
+            font-size: 12px;
+            text-transform: uppercase;
+            color: #666;
+        }
+
+        .demo-controls input[type="range"] {
+            width: 100%;
+        }
+
+        .demo-controls input[type="color"] {
+            width: 60px;
+            height: 40px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .demo-controls button {
+            width: 100%;
+            padding: 12px;
+            margin-top: 15px;
+            background: #ff6b35;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .demo-controls button:hover {
+            opacity: 0.9;
+        }
+
+        .demo-controls .value-display {
+            display: inline-block;
+            margin-left: 10px;
+            font-weight: 600;
+            color: #ff6b35;
+        }
+
+        /* Age Gate Styles */
+        .hotrocket-age-gate-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.95);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 999999;
+            opacity: 0;
+            animation: fadeIn 0.5s ease forwards;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+            }
+        }
+
+        .hotrocket-age-gate-modal {
+            background-color: #ffffff;
+            border-radius: 24px;
+            padding: 48px 40px;
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            transform: scale(0.9) translateY(20px);
+            animation: slideUp 0.5s ease 0.2s forwards;
+            position: relative;
+        }
+
+        @keyframes slideUp {
+            to {
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        .hotrocket-age-gate-icon {
+            width: 64px;
+            height: 64px;
+            margin: 0 auto 24px;
+            color: #ff6b35;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hotrocket-age-gate-icon.hotrocket-logo-size-small {
+            width: 48px;
+            height: 48px;
+        }
+
+        .hotrocket-age-gate-icon.hotrocket-logo-size-medium {
+            width: 64px;
+            height: 64px;
+        }
+
+        .hotrocket-age-gate-icon.hotrocket-logo-size-large {
+            width: 96px;
+            height: 96px;
+        }
+
+        .hotrocket-age-gate-icon svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        .hotrocket-age-gate-modal h2 {
+            font-size: 28px;
+            font-weight: 700;
+            color: #333333;
+            margin: 0 0 16px 0;
+            line-height: 1.3;
+            letter-spacing: -0.5px;
+        }
+
+        .hotrocket-age-gate-message {
+            font-size: 16px;
+            color: #666666;
+            margin: 0 0 32px 0;
+            line-height: 1.6;
+        }
+
+        .hotrocket-age-gate-remember {
+            margin-bottom: 32px;
+        }
+
+        .hotrocket-age-gate-remember label {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            font-size: 14px;
+            color: #666666;
+            user-select: none;
+        }
+
+        .hotrocket-age-gate-remember input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+            accent-color: #ff6b35;
+        }
+
+        .hotrocket-age-gate-remember span {
+            line-height: 1.4;
+        }
+
+        .hotrocket-age-gate-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+
+        .hotrocket-age-gate-btn {
+            padding: 16px 32px;
+            font-size: 16px;
+            font-weight: 600;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            letter-spacing: 0.3px;
+        }
+
+        .hotrocket-age-gate-btn-yes {
+            background-color: #ff6b35;
+            color: #ffffff;
+        }
+
+        .hotrocket-age-gate-btn-yes:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px -10px rgba(114, 47, 55, 0.5);
+        }
+
+        .hotrocket-age-gate-btn-yes:active {
+            transform: translateY(0);
+        }
+
+        .hotrocket-age-gate-btn-no {
+            background-color: transparent;
+            color: #666666;
+            border: 2px solid #e0e0e0;
+        }
+
+        .hotrocket-age-gate-btn-no:hover {
+            background-color: #f5f5f5;
+            border-color: #cccccc;
+        }
+
+        .hotrocket-age-gate-btn-no:active {
+            background-color: #eeeeee;
+        }
+
+        .hotrocket-age-gate-footer {
+            font-size: 12px;
+            color: #999999;
+            margin: 0;
+            line-height: 1.5;
+        }
+
+        .hotrocket-age-gate-overlay.fade-out {
+            animation: fadeOut 0.4s ease forwards;
+        }
+
+        @keyframes fadeOut {
+            to {
+                opacity: 0;
+            }
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: scale(1) translateX(0); }
+            10%, 30%, 50%, 70%, 90% { transform: scale(1) translateX(-5px); }
+            20%, 40%, 60%, 80% { transform: scale(1) translateX(5px); }
+        }
+
+        @media (max-width: 600px) {
+            .hotrocket-age-gate-modal {
+                padding: 40px 24px;
+                max-width: 95%;
+                border-radius: 20px;
+            }
+
+            .hotrocket-age-gate-modal h2 {
+                font-size: 24px;
+            }
+
+            .hotrocket-age-gate-message {
+                font-size: 15px;
+            }
+
+            .hotrocket-age-gate-btn {
+                padding: 14px 24px;
+                font-size: 15px;
+            }
+
+            .hotrocket-age-gate-icon.hotrocket-logo-size-small {
+                width: 40px;
+                height: 40px;
+            }
+
+            .hotrocket-age-gate-icon.hotrocket-logo-size-medium {
+                width: 56px;
+                height: 56px;
+            }
+
+            .hotrocket-age-gate-icon.hotrocket-logo-size-large {
+                width: 80px;
+                height: 80px;
+            }
+
+            .demo-controls {
+                position: static;
+                margin: 20px auto;
+                max-width: 100%;
+            }
+        }
+
+        body.hotrocket-age-gate-active {
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Demo Content (represents your website) -->
+    <div class="demo-content">
+        <h1>🍷 Hot Rocket</h1>
+        <p>Modern Age Verification</p>
+        <p style="margin-top: 40px; font-size: 16px;">This is a preview of your website content behind the age gate.</p>
+    </div>
+
+    <!-- Customization Controls -->
+    <div class="demo-controls">
+        <h3>Live Preview Controls</h3>
+
+        <label>Logo/Icon Size</label>
+        <select id="logoSize" style="width: 100%; padding: 8px; border-radius: 4px; border: 1px solid #ddd; margin-bottom: 15px;">
+            <option value="small">Small (48px)</option>
+            <option value="medium" selected>Medium (64px)</option>
+            <option value="large">Large (96px)</option>
+        </select>
+
+        <label>Overlay Opacity <span class="value-display" id="opacityValue">95%</span></label>
+        <input type="range" id="overlayOpacity" min="0" max="100" value="95" step="5">
+
+        <label>Overlay Color</label>
+        <input type="color" id="overlayColor" value="#000000">
+
+        <label>Popup Background</label>
+        <input type="color" id="popupBg" value="#ffffff">
+
+        <label>Primary Button Color</label>
+        <input type="color" id="primaryColor" value="#ff6b35">
+
+        <label>Text Color</label>
+        <input type="color" id="textColor" value="#333333">
+
+        <button onclick="resetAgeGate()">Show Age Gate Again</button>
+    </div>
+
+    <!-- Age Gate Popup -->
+    <div class="hotrocket-age-gate-overlay" id="hotrocketAgeGateOverlay">
+        <div class="hotrocket-age-gate-modal">
+            <div class="hotrocket-age-gate-icon hotrocket-logo-size-medium" id="ageGateIcon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M8 2h8l4 9H4l4-9z"/>
+                    <path d="M12 11v11"/>
+                    <path d="M8 22h8"/>
+                    <ellipse cx="12" cy="8" rx="2" ry="3"/>
+                </svg>
+            </div>
+            <h2>Welcome to Hot Rocket wine shop</h2>
+            <p class="hotrocket-age-gate-message">Please confirm that you are over 18 years old to enter this site.</p>
+
+            <div class="hotrocket-age-gate-remember">
+                <label>
+                    <input type="checkbox" id="hotrocketAgeGateRemember" checked>
+                    <span>Remember me for 30 days</span>
+                </label>
+            </div>
+
+            <div class="hotrocket-age-gate-buttons">
+                <button class="hotrocket-age-gate-btn hotrocket-age-gate-btn-yes" id="hotrocketAgeGateYes">
+                    Yes, I'm 18+
+                </button>
+                <button class="hotrocket-age-gate-btn hotrocket-age-gate-btn-no" id="hotrocketAgeGateNo">
+                    No, Exit
+                </button>
+            </div>
+
+            <p class="hotrocket-age-gate-footer">
+                By entering this site you are agreeing to the Terms of Use and Privacy Policy.
+            </p>
+        </div>
+    </div>
+
+    <script>
+        // Age Gate functionality
+        document.getElementById('hotrocketAgeGateYes').addEventListener('click', function() {
+            const overlay = document.getElementById('hotrocketAgeGateOverlay');
+            overlay.classList.add('fade-out');
+            setTimeout(function() {
+                overlay.style.display = 'none';
+                document.body.classList.remove('hotrocket-age-gate-active');
+            }, 400);
+        });
+
+        document.getElementById('hotrocketAgeGateNo').addEventListener('click', function() {
+            alert('You must be 18 or older to enter this site.\n\nIn the real plugin, you will be redirected to Google.com or your custom URL.');
+        });
+
+        // Click outside to shake
+        document.getElementById('hotrocketAgeGateOverlay').addEventListener('click', function(e) {
+            if (e.target === this) {
+                const modal = document.querySelector('.hotrocket-age-gate-modal');
+                modal.style.animation = 'none';
+                setTimeout(function() {
+                    modal.style.animation = 'shake 0.5s ease, slideUp 0.5s ease 0.2s forwards';
+                }, 10);
+            }
+        });
+
+        // Prevent body scroll
+        document.body.classList.add('hotrocket-age-gate-active');
+
+        // Live customization controls
+        document.getElementById('overlayOpacity').addEventListener('input', function() {
+            const value = this.value;
+            document.getElementById('opacityValue').textContent = value + '%';
+            const color = document.getElementById('overlayColor').value;
+            const rgb = hexToRgb(color);
+            const opacity = value / 100;
+            document.getElementById('hotrocketAgeGateOverlay').style.backgroundColor = `rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, ${opacity})`;
+        });
+
+        document.getElementById('overlayColor').addEventListener('input', function() {
+            const color = this.value;
+            const opacity = document.getElementById('overlayOpacity').value / 100;
+            const rgb = hexToRgb(color);
+            document.getElementById('hotrocketAgeGateOverlay').style.backgroundColor = `rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, ${opacity})`;
+        });
+
+        document.getElementById('popupBg').addEventListener('input', function() {
+            document.querySelector('.hotrocket-age-gate-modal').style.backgroundColor = this.value;
+        });
+
+        document.getElementById('primaryColor').addEventListener('input', function() {
+            document.querySelector('.hotrocket-age-gate-btn-yes').style.backgroundColor = this.value;
+            document.querySelector('.hotrocket-age-gate-icon').style.color = this.value;
+            document.querySelector('.hotrocket-age-gate-remember input[type="checkbox"]').style.accentColor = this.value;
+        });
+
+        document.getElementById('textColor').addEventListener('input', function() {
+            const color = this.value;
+            document.querySelector('.hotrocket-age-gate-modal h2').style.color = color;
+            document.querySelector('.hotrocket-age-gate-message').style.color = color;
+            document.querySelector('.hotrocket-age-gate-remember label').style.color = color;
+        });
+
+        // Logo size change handler
+        document.getElementById('logoSize').addEventListener('change', function() {
+            const icon = document.getElementById('ageGateIcon');
+            // Remove all size classes
+            icon.classList.remove('hotrocket-logo-size-small', 'hotrocket-logo-size-medium', 'hotrocket-logo-size-large');
+            // Add the selected size class
+            icon.classList.add('hotrocket-logo-size-' + this.value);
+        });
+
+        function hexToRgb(hex) {
+            const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+            return result ? {
+                r: parseInt(result[1], 16),
+                g: parseInt(result[2], 16),
+                b: parseInt(result[3], 16)
+            } : null;
+        }
+
+        function resetAgeGate() {
+            const overlay = document.getElementById('hotrocketAgeGateOverlay');
+            overlay.style.display = 'flex';
+            overlay.classList.remove('fade-out');
+            document.body.classList.add('hotrocket-age-gate-active');
+
+            // Reset animation
+            const modal = document.querySelector('.hotrocket-age-gate-modal');
+            modal.style.animation = 'none';
+            setTimeout(function() {
+                modal.style.animation = 'slideUp 0.5s ease forwards';
+            }, 10);
+        }
+
+        // Enter key to confirm
+        document.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter' && document.getElementById('hotrocketAgeGateOverlay').style.display !== 'none') {
+                document.getElementById('hotrocketAgeGateYes').click();
+            }
+        });
+    </script>
+
+</body>
+</html>
