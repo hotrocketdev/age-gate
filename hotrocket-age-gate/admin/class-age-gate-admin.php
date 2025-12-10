@@ -62,6 +62,7 @@ class HotRocket_Age_Gate_Admin {
         // Design Settings Fields
         add_settings_field('custom_logo', 'Custom Logo/Icon', array(__CLASS__, 'custom_logo_callback'), 'hotrocket-age-gate', 'hotrocket_age_gate_design');
         add_settings_field('logo_size', 'Logo/Icon Size', array(__CLASS__, 'logo_size_callback'), 'hotrocket-age-gate', 'hotrocket_age_gate_design');
+        add_settings_field('popup_size', 'Popup Window Size', array(__CLASS__, 'popup_size_callback'), 'hotrocket-age-gate', 'hotrocket_age_gate_design');
         add_settings_field('overlay_opacity', 'Overlay Transparency', array(__CLASS__, 'overlay_opacity_callback'), 'hotrocket-age-gate', 'hotrocket_age_gate_design');
         add_settings_field('overlay_color', 'Overlay Color', array(__CLASS__, 'overlay_color_callback'), 'hotrocket-age-gate', 'hotrocket_age_gate_design');
         add_settings_field('popup_bg_color', 'Popup Background Color', array(__CLASS__, 'popup_bg_color_callback'), 'hotrocket-age-gate', 'hotrocket_age_gate_design');
@@ -93,6 +94,9 @@ class HotRocket_Age_Gate_Admin {
         // Validate logo size - only allow small, medium, large
         $allowed_sizes = array('small', 'medium', 'large');
         $sanitized['logo_size'] = !empty($input['logo_size']) && in_array($input['logo_size'], $allowed_sizes) ? $input['logo_size'] : 'medium';
+
+        // Validate popup size - only allow small, medium, large
+        $sanitized['popup_size'] = !empty($input['popup_size']) && in_array($input['popup_size'], $allowed_sizes) ? $input['popup_size'] : 'large';
 
         return $sanitized;
     }
@@ -204,6 +208,19 @@ class HotRocket_Age_Gate_Admin {
             <option value="large" <?php selected($current_size, 'large'); ?>>Large (96px)</option>
         </select>
         <p class="description">Choose the display size for the logo/icon in the popup</p>
+        <?php
+    }
+
+    public static function popup_size_callback() {
+        $options = get_option('hotrocket_age_gate_options');
+        $current_size = !empty($options['popup_size']) ? esc_attr($options['popup_size']) : 'large';
+        ?>
+        <select name="hotrocket_age_gate_options[popup_size]" class="regular-text">
+            <option value="small" <?php selected($current_size, 'small'); ?>>Small (320px)</option>
+            <option value="medium" <?php selected($current_size, 'medium'); ?>>Medium (400px)</option>
+            <option value="large" <?php selected($current_size, 'large'); ?>>Large (500px)</option>
+        </select>
+        <p class="description">Choose the size of the popup window itself</p>
         <?php
     }
 

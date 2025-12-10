@@ -131,6 +131,21 @@
             position: relative;
         }
 
+        .hotrocket-age-gate-modal.hotrocket-popup-size-small {
+            max-width: 320px;
+            padding: 32px 24px;
+        }
+
+        .hotrocket-age-gate-modal.hotrocket-popup-size-medium {
+            max-width: 400px;
+            padding: 40px 32px;
+        }
+
+        .hotrocket-age-gate-modal.hotrocket-popup-size-large {
+            max-width: 500px;
+            padding: 48px 40px;
+        }
+
         @keyframes slideUp {
             to {
                 transform: scale(1) translateY(0);
@@ -346,6 +361,13 @@
             <option value="large">Large (96px)</option>
         </select>
 
+        <label>Popup Window Size</label>
+        <select id="popupSize" style="width: 100%; padding: 8px; border-radius: 4px; border: 1px solid #ddd; margin-bottom: 15px;">
+            <option value="small">Small (320px)</option>
+            <option value="medium">Medium (400px)</option>
+            <option value="large" selected>Large (500px)</option>
+        </select>
+
         <label>Overlay Opacity <span class="value-display" id="opacityValue">95%</span></label>
         <input type="range" id="overlayOpacity" min="0" max="100" value="95" step="5">
 
@@ -366,7 +388,7 @@
 
     <!-- Age Gate Popup -->
     <div class="hotrocket-age-gate-overlay" id="hotrocketAgeGateOverlay">
-        <div class="hotrocket-age-gate-modal">
+        <div class="hotrocket-age-gate-modal hotrocket-popup-size-large" id="ageGateModal">
             <div class="hotrocket-age-gate-icon hotrocket-logo-size-medium" id="ageGateIcon">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <path d="M8 2h8l4 9H4l4-9z"/>
@@ -470,6 +492,15 @@
             icon.classList.remove('hotrocket-logo-size-small', 'hotrocket-logo-size-medium', 'hotrocket-logo-size-large');
             // Add the selected size class
             icon.classList.add('hotrocket-logo-size-' + this.value);
+        });
+
+        // Popup size change handler
+        document.getElementById('popupSize').addEventListener('change', function() {
+            const modal = document.getElementById('ageGateModal');
+            // Remove all size classes
+            modal.classList.remove('hotrocket-popup-size-small', 'hotrocket-popup-size-medium', 'hotrocket-popup-size-large');
+            // Add the selected size class
+            modal.classList.add('hotrocket-popup-size-' + this.value);
         });
 
         function hexToRgb(hex) {

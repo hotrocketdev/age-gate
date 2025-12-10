@@ -117,10 +117,11 @@ class HotRocket_Age_Gate_Frontend {
         $age_limit = !empty($this->options['age_limit']) ? intval($this->options['age_limit']) : 18;
         $custom_logo = !empty($this->options['custom_logo']) ? esc_url($this->options['custom_logo']) : '';
         $logo_size = !empty($this->options['logo_size']) ? esc_attr($this->options['logo_size']) : 'medium';
+        $popup_size = !empty($this->options['popup_size']) ? esc_attr($this->options['popup_size']) : 'large';
 
         ?>
         <div class="hotrocket-age-gate-overlay" id="vinsAgeGateOverlay">
-            <div class="hotrocket-age-gate-modal">
+            <div class="hotrocket-age-gate-modal hotrocket-popup-size-<?php echo $popup_size; ?>">
                 <div class="hotrocket-age-gate-icon hotrocket-logo-size-<?php echo $logo_size; ?>">
                     <?php if ($custom_logo): ?>
                         <img src="<?php echo $custom_logo; ?>" alt="Logo" class="hotrocket-custom-logo">

@@ -68,6 +68,7 @@ class HotRocket_Age_Gate {
             'show_remember' => 1,
             'custom_logo' => '',
             'logo_size' => 'medium',
+            'popup_size' => 'large',
             'overlay_opacity' => 95,
             'overlay_color' => '#000000',
             'popup_bg_color' => '#ffffff',

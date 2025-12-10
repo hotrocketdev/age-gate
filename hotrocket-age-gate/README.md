@@ -11,7 +11,8 @@ A modern, customizable age verification plugin built for WordPress and WooCommer
 ✅ **Easy to Use** - Simple admin interface with live preview capability
 ✅ **GDPR Friendly** - Consent-based with "Remember me" option
 ✅ **Custom Logo Upload** - Use your own branding
-✅ **Size Options** - Choose from Small, Medium, or Large logo sizes
+✅ **Flexible Sizing** - Choose popup size (Small/Medium/Large) and logo size independently
+✅ **Multiple Size Options** - 3 sizes for both popup window and logo/icon
 
 ## Installation
 
@@ -46,6 +47,7 @@ A modern, customizable age verification plugin built for WordPress and WooCommer
 ### Design & Appearance
 - **Custom Logo/Icon** - Upload your own logo image or use the default wine glass icon
 - **Logo/Icon Size** - Choose from Small (48px), Medium (64px), or Large (96px)
+- **Popup Window Size** - Choose from Small (320px), Medium (400px), or Large (500px)
 - **Overlay Transparency** - Control background opacity (0-100%)
 - **Overlay Color** - Background color behind popup
 - **Popup Background Color** - Modal background color
@@ -61,6 +63,8 @@ The plugin comes pre-configured with sensible defaults:
 - **Message**: "Please confirm that you are over 18 years old to enter this site."
 - **Age Limit**: 18 years
 - **Cookie Duration**: 30 days
+- **Popup Size**: Large (500px)
+- **Logo Size**: Medium (64px)
 - **Primary Color**: #ff6b35 (Hot Rocket Orange)
 - **Overlay Opacity**: 95%
 
