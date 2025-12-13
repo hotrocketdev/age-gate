@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hot Rocket Age Gate - Preview</title>
+    <title>Vin's Age Gate - Preview</title>
     <style>
         /* Demo Page Styles */
         body {
@@ -46,7 +46,7 @@
 
         .demo-controls h3 {
             margin-top: 0;
-            color: #ff6b35;
+            color: #722f37;
         }
 
         .demo-controls label {
@@ -74,7 +74,7 @@
             width: 100%;
             padding: 12px;
             margin-top: 15px;
-            background: #ff6b35;
+            background: #722f37;
             color: white;
             border: none;
             border-radius: 8px;
@@ -91,11 +91,11 @@
             display: inline-block;
             margin-left: 10px;
             font-weight: 600;
-            color: #ff6b35;
+            color: #722f37;
         }
 
         /* Age Gate Styles */
-        .hotrocket-age-gate-overlay {
+        .vins-age-gate-overlay {
             position: fixed;
             top: 0;
             left: 0;
@@ -118,7 +118,7 @@
             }
         }
 
-        .hotrocket-age-gate-modal {
+        .vins-age-gate-modal {
             background-color: #ffffff;
             border-radius: 24px;
             padding: 48px 40px;
@@ -131,58 +131,43 @@
             position: relative;
         }
 
-        .hotrocket-age-gate-modal.hotrocket-popup-size-small {
-            max-width: 320px;
-            padding: 32px 24px;
-        }
-
-        .hotrocket-age-gate-modal.hotrocket-popup-size-medium {
-            max-width: 400px;
-            padding: 40px 32px;
-        }
-
-        .hotrocket-age-gate-modal.hotrocket-popup-size-large {
-            max-width: 500px;
-            padding: 48px 40px;
-        }
-
         @keyframes slideUp {
             to {
                 transform: scale(1) translateY(0);
             }
         }
 
-        .hotrocket-age-gate-icon {
+        .vins-age-gate-icon {
             width: 64px;
             height: 64px;
             margin: 0 auto 24px;
-            color: #ff6b35;
+            color: #722f37;
             display: flex;
             align-items: center;
             justify-content: center;
         }
 
-        .hotrocket-age-gate-icon.hotrocket-logo-size-small {
+        .vins-age-gate-icon.vins-logo-size-small {
             width: 48px;
             height: 48px;
         }
 
-        .hotrocket-age-gate-icon.hotrocket-logo-size-medium {
+        .vins-age-gate-icon.vins-logo-size-medium {
             width: 64px;
             height: 64px;
         }
 
-        .hotrocket-age-gate-icon.hotrocket-logo-size-large {
+        .vins-age-gate-icon.vins-logo-size-large {
             width: 96px;
             height: 96px;
         }
 
-        .hotrocket-age-gate-icon svg {
+        .vins-age-gate-icon svg {
             width: 100%;
             height: 100%;
         }
 
-        .hotrocket-age-gate-modal h2 {
+        .vins-age-gate-modal h2 {
             font-size: 28px;
             font-weight: 700;
             color: #333333;
@@ -191,18 +176,18 @@
             letter-spacing: -0.5px;
         }
 
-        .hotrocket-age-gate-message {
+        .vins-age-gate-message {
             font-size: 16px;
             color: #666666;
             margin: 0 0 32px 0;
             line-height: 1.6;
         }
 
-        .hotrocket-age-gate-remember {
+        .vins-age-gate-remember {
             margin-bottom: 32px;
         }
 
-        .hotrocket-age-gate-remember label {
+        .vins-age-gate-remember label {
             display: inline-flex;
             align-items: center;
             gap: 10px;
@@ -212,25 +197,25 @@
             user-select: none;
         }
 
-        .hotrocket-age-gate-remember input[type="checkbox"] {
+        .vins-age-gate-remember input[type="checkbox"] {
             width: 20px;
             height: 20px;
             cursor: pointer;
-            accent-color: #ff6b35;
+            accent-color: #722f37;
         }
 
-        .hotrocket-age-gate-remember span {
+        .vins-age-gate-remember span {
             line-height: 1.4;
         }
 
-        .hotrocket-age-gate-buttons {
+        .vins-age-gate-buttons {
             display: flex;
             flex-direction: column;
             gap: 12px;
             margin-bottom: 24px;
         }
 
-        .hotrocket-age-gate-btn {
+        .vins-age-gate-btn {
             padding: 16px 32px;
             font-size: 16px;
             font-weight: 600;
@@ -242,43 +227,43 @@
             letter-spacing: 0.3px;
         }
 
-        .hotrocket-age-gate-btn-yes {
-            background-color: #ff6b35;
+        .vins-age-gate-btn-yes {
+            background-color: #722f37;
             color: #ffffff;
         }
 
-        .hotrocket-age-gate-btn-yes:hover {
+        .vins-age-gate-btn-yes:hover {
             transform: translateY(-2px);
             box-shadow: 0 10px 20px -10px rgba(114, 47, 55, 0.5);
         }
 
-        .hotrocket-age-gate-btn-yes:active {
+        .vins-age-gate-btn-yes:active {
             transform: translateY(0);
         }
 
-        .hotrocket-age-gate-btn-no {
+        .vins-age-gate-btn-no {
             background-color: transparent;
             color: #666666;
             border: 2px solid #e0e0e0;
         }
 
-        .hotrocket-age-gate-btn-no:hover {
+        .vins-age-gate-btn-no:hover {
             background-color: #f5f5f5;
             border-color: #cccccc;
         }
 
-        .hotrocket-age-gate-btn-no:active {
+        .vins-age-gate-btn-no:active {
             background-color: #eeeeee;
         }
 
-        .hotrocket-age-gate-footer {
+        .vins-age-gate-footer {
             font-size: 12px;
             color: #999999;
             margin: 0;
             line-height: 1.5;
         }
 
-        .hotrocket-age-gate-overlay.fade-out {
+        .vins-age-gate-overlay.fade-out {
             animation: fadeOut 0.4s ease forwards;
         }
 
@@ -295,36 +280,36 @@
         }
 
         @media (max-width: 600px) {
-            .hotrocket-age-gate-modal {
+            .vins-age-gate-modal {
                 padding: 40px 24px;
                 max-width: 95%;
                 border-radius: 20px;
             }
 
-            .hotrocket-age-gate-modal h2 {
+            .vins-age-gate-modal h2 {
                 font-size: 24px;
             }
 
-            .hotrocket-age-gate-message {
+            .vins-age-gate-message {
                 font-size: 15px;
             }
 
-            .hotrocket-age-gate-btn {
+            .vins-age-gate-btn {
                 padding: 14px 24px;
                 font-size: 15px;
             }
 
-            .hotrocket-age-gate-icon.hotrocket-logo-size-small {
+            .vins-age-gate-icon.vins-logo-size-small {
                 width: 40px;
                 height: 40px;
             }
 
-            .hotrocket-age-gate-icon.hotrocket-logo-size-medium {
+            .vins-age-gate-icon.vins-logo-size-medium {
                 width: 56px;
                 height: 56px;
             }
 
-            .hotrocket-age-gate-icon.hotrocket-logo-size-large {
+            .vins-age-gate-icon.vins-logo-size-large {
                 width: 80px;
                 height: 80px;
             }
@@ -336,7 +321,7 @@
             }
         }
 
-        body.hotrocket-age-gate-active {
+        body.vins-age-gate-active {
             overflow: hidden;
         }
     </style>
@@ -345,8 +330,8 @@
 
     <!-- Demo Content (represents your website) -->
     <div class="demo-content">
-        <h1>🍷 Hot Rocket</h1>
-        <p>Modern Age Verification</p>
+        <h1>🍷 Vin's Winery</h1>
+        <p>Premium Portuguese Wines</p>
         <p style="margin-top: 40px; font-size: 16px;">This is a preview of your website content behind the age gate.</p>
     </div>
 
@@ -361,13 +346,6 @@
             <option value="large">Large (96px)</option>
         </select>
 
-        <label>Popup Window Size</label>
-        <select id="popupSize" style="width: 100%; padding: 8px; border-radius: 4px; border: 1px solid #ddd; margin-bottom: 15px;">
-            <option value="small">Small (320px)</option>
-            <option value="medium">Medium (400px)</option>
-            <option value="large" selected>Large (500px)</option>
-        </select>
-
         <label>Overlay Opacity <span class="value-display" id="opacityValue">95%</span></label>
         <input type="range" id="overlayOpacity" min="0" max="100" value="95" step="5">
 
@@ -378,7 +356,7 @@
         <input type="color" id="popupBg" value="#ffffff">
 
         <label>Primary Button Color</label>
-        <input type="color" id="primaryColor" value="#ff6b35">
+        <input type="color" id="primaryColor" value="#722f37">
 
         <label>Text Color</label>
         <input type="color" id="textColor" value="#333333">
@@ -387,9 +365,9 @@
     </div>
 
     <!-- Age Gate Popup -->
-    <div class="hotrocket-age-gate-overlay" id="hotrocketAgeGateOverlay">
-        <div class="hotrocket-age-gate-modal hotrocket-popup-size-large" id="ageGateModal">
-            <div class="hotrocket-age-gate-icon hotrocket-logo-size-medium" id="ageGateIcon">
+    <div class="vins-age-gate-overlay" id="vinsAgeGateOverlay">
+        <div class="vins-age-gate-modal">
+            <div class="vins-age-gate-icon vins-logo-size-medium" id="ageGateIcon">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <path d="M8 2h8l4 9H4l4-9z"/>
                     <path d="M12 11v11"/>
@@ -397,26 +375,26 @@
                     <ellipse cx="12" cy="8" rx="2" ry="3"/>
                 </svg>
             </div>
-            <h2>Welcome to Hot Rocket wine shop</h2>
-            <p class="hotrocket-age-gate-message">Please confirm that you are over 18 years old to enter this site.</p>
+            <h2>Welcome to Vin's Winery wine shop</h2>
+            <p class="vins-age-gate-message">Please confirm that you are over 18 years old to enter this site.</p>
 
-            <div class="hotrocket-age-gate-remember">
+            <div class="vins-age-gate-remember">
                 <label>
-                    <input type="checkbox" id="hotrocketAgeGateRemember" checked>
+                    <input type="checkbox" id="vinsAgeGateRemember" checked>
                     <span>Remember me for 30 days</span>
                 </label>
             </div>
 
-            <div class="hotrocket-age-gate-buttons">
-                <button class="hotrocket-age-gate-btn hotrocket-age-gate-btn-yes" id="hotrocketAgeGateYes">
+            <div class="vins-age-gate-buttons">
+                <button class="vins-age-gate-btn vins-age-gate-btn-yes" id="vinsAgeGateYes">
                     Yes, I'm 18+
                 </button>
-                <button class="hotrocket-age-gate-btn hotrocket-age-gate-btn-no" id="hotrocketAgeGateNo">
+                <button class="vins-age-gate-btn vins-age-gate-btn-no" id="vinsAgeGateNo">
                     No, Exit
                 </button>
             </div>
 
-            <p class="hotrocket-age-gate-footer">
+            <p class="vins-age-gate-footer">
                 By entering this site you are agreeing to the Terms of Use and Privacy Policy.
             </p>
         </div>
@@ -424,23 +402,23 @@
 
     <script>
         // Age Gate functionality
-        document.getElementById('hotrocketAgeGateYes').addEventListener('click', function() {
-            const overlay = document.getElementById('hotrocketAgeGateOverlay');
+        document.getElementById('vinsAgeGateYes').addEventListener('click', function() {
+            const overlay = document.getElementById('vinsAgeGateOverlay');
             overlay.classList.add('fade-out');
             setTimeout(function() {
                 overlay.style.display = 'none';
-                document.body.classList.remove('hotrocket-age-gate-active');
+                document.body.classList.remove('vins-age-gate-active');
             }, 400);
         });
 
-        document.getElementById('hotrocketAgeGateNo').addEventListener('click', function() {
+        document.getElementById('vinsAgeGateNo').addEventListener('click', function() {
             alert('You must be 18 or older to enter this site.\n\nIn the real plugin, you will be redirected to Google.com or your custom URL.');
         });
 
         // Click outside to shake
-        document.getElementById('hotrocketAgeGateOverlay').addEventListener('click', function(e) {
+        document.getElementById('vinsAgeGateOverlay').addEventListener('click', function(e) {
             if (e.target === this) {
-                const modal = document.querySelector('.hotrocket-age-gate-modal');
+                const modal = document.querySelector('.vins-age-gate-modal');
                 modal.style.animation = 'none';
                 setTimeout(function() {
                     modal.style.animation = 'shake 0.5s ease, slideUp 0.5s ease 0.2s forwards';
@@ -449,7 +427,7 @@
         });
 
         // Prevent body scroll
-        document.body.classList.add('hotrocket-age-gate-active');
+        document.body.classList.add('vins-age-gate-active');
 
         // Live customization controls
         document.getElementById('overlayOpacity').addEventListener('input', function() {
@@ -458,49 +436,40 @@
             const color = document.getElementById('overlayColor').value;
             const rgb = hexToRgb(color);
             const opacity = value / 100;
-            document.getElementById('hotrocketAgeGateOverlay').style.backgroundColor = `rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, ${opacity})`;
+            document.getElementById('vinsAgeGateOverlay').style.backgroundColor = `rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, ${opacity})`;
         });
 
         document.getElementById('overlayColor').addEventListener('input', function() {
             const color = this.value;
             const opacity = document.getElementById('overlayOpacity').value / 100;
             const rgb = hexToRgb(color);
-            document.getElementById('hotrocketAgeGateOverlay').style.backgroundColor = `rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, ${opacity})`;
+            document.getElementById('vinsAgeGateOverlay').style.backgroundColor = `rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, ${opacity})`;
         });
 
         document.getElementById('popupBg').addEventListener('input', function() {
-            document.querySelector('.hotrocket-age-gate-modal').style.backgroundColor = this.value;
+            document.querySelector('.vins-age-gate-modal').style.backgroundColor = this.value;
         });
 
         document.getElementById('primaryColor').addEventListener('input', function() {
-            document.querySelector('.hotrocket-age-gate-btn-yes').style.backgroundColor = this.value;
-            document.querySelector('.hotrocket-age-gate-icon').style.color = this.value;
-            document.querySelector('.hotrocket-age-gate-remember input[type="checkbox"]').style.accentColor = this.value;
+            document.querySelector('.vins-age-gate-btn-yes').style.backgroundColor = this.value;
+            document.querySelector('.vins-age-gate-icon').style.color = this.value;
+            document.querySelector('.vins-age-gate-remember input[type="checkbox"]').style.accentColor = this.value;
         });
 
         document.getElementById('textColor').addEventListener('input', function() {
             const color = this.value;
-            document.querySelector('.hotrocket-age-gate-modal h2').style.color = color;
-            document.querySelector('.hotrocket-age-gate-message').style.color = color;
-            document.querySelector('.hotrocket-age-gate-remember label').style.color = color;
+            document.querySelector('.vins-age-gate-modal h2').style.color = color;
+            document.querySelector('.vins-age-gate-message').style.color = color;
+            document.querySelector('.vins-age-gate-remember label').style.color = color;
         });
 
         // Logo size change handler
         document.getElementById('logoSize').addEventListener('change', function() {
             const icon = document.getElementById('ageGateIcon');
             // Remove all size classes
-            icon.classList.remove('hotrocket-logo-size-small', 'hotrocket-logo-size-medium', 'hotrocket-logo-size-large');
+            icon.classList.remove('vins-logo-size-small', 'vins-logo-size-medium', 'vins-logo-size-large');
             // Add the selected size class
-            icon.classList.add('hotrocket-logo-size-' + this.value);
-        });
-
-        // Popup size change handler
-        document.getElementById('popupSize').addEventListener('change', function() {
-            const modal = document.getElementById('ageGateModal');
-            // Remove all size classes
-            modal.classList.remove('hotrocket-popup-size-small', 'hotrocket-popup-size-medium', 'hotrocket-popup-size-large');
-            // Add the selected size class
-            modal.classList.add('hotrocket-popup-size-' + this.value);
+            icon.classList.add('vins-logo-size-' + this.value);
         });
 
         function hexToRgb(hex) {
@@ -513,13 +482,13 @@
         }
 
         function resetAgeGate() {
-            const overlay = document.getElementById('hotrocketAgeGateOverlay');
+            const overlay = document.getElementById('vinsAgeGateOverlay');
             overlay.style.display = 'flex';
             overlay.classList.remove('fade-out');
-            document.body.classList.add('hotrocket-age-gate-active');
+            document.body.classList.add('vins-age-gate-active');
 
             // Reset animation
-            const modal = document.querySelector('.hotrocket-age-gate-modal');
+            const modal = document.querySelector('.vins-age-gate-modal');
             modal.style.animation = 'none';
             setTimeout(function() {
                 modal.style.animation = 'slideUp 0.5s ease forwards';
@@ -528,8 +497,8 @@
 
         // Enter key to confirm
         document.addEventListener('keypress', function(e) {
-            if (e.key === 'Enter' && document.getElementById('hotrocketAgeGateOverlay').style.display !== 'none') {
-                document.getElementById('hotrocketAgeGateYes').click();
+            if (e.key === 'Enter' && document.getElementById('vinsAgeGateOverlay').style.display !== 'none') {
+                document.getElementById('vinsAgeGateYes').click();
             }
         });
     </script>

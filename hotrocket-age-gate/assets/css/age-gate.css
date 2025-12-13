@@ -1,5 +1,5 @@
 /**
- * Hot Rocket Age Gate - Modern UI Styles
+ * HotRocket Age Gate - Modern UI Styles
  */
 
 /* Overlay */
@@ -40,15 +40,21 @@
     position: relative;
 }
 
+@keyframes slideUp {
+    to {
+        transform: scale(1) translateY(0);
+    }
+}
+
 /* Popup Size Variations */
 .hotrocket-age-gate-modal.hotrocket-popup-size-small {
-    max-width: 320px;
-    padding: 32px 24px;
+    max-width: 350px;
+    padding: 32px 28px;
 }
 
 .hotrocket-age-gate-modal.hotrocket-popup-size-medium {
-    max-width: 400px;
-    padding: 40px 32px;
+    max-width: 420px;
+    padding: 40px 34px;
 }
 
 .hotrocket-age-gate-modal.hotrocket-popup-size-large {
@@ -56,18 +62,12 @@
     padding: 48px 40px;
 }
 
-@keyframes slideUp {
-    to {
-        transform: scale(1) translateY(0);
-    }
-}
-
 /* Wine Glass Icon */
 .hotrocket-age-gate-icon {
     width: 64px;
     height: 64px;
     margin: 0 auto 24px;
-    color: #ff6b35;
+    color: #722f37;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -139,7 +139,7 @@
     width: 20px;
     height: 20px;
     cursor: pointer;
-    accent-color: #ff6b35;
+    accent-color: #722f37;
 }
 
 .hotrocket-age-gate-remember span {
@@ -169,7 +169,7 @@
 
 /* Yes Button */
 .hotrocket-age-gate-btn-yes {
-    background-color: #ff6b35;
+    background-color: #722f37;
     color: #ffffff;
 }
 
@@ -220,9 +220,20 @@
 /* Responsive Design */
 @media (max-width: 600px) {
     .hotrocket-age-gate-modal {
-        padding: 40px 24px;
         max-width: 95%;
         border-radius: 20px;
+    }
+
+    .hotrocket-age-gate-modal.hotrocket-popup-size-small {
+        padding: 28px 20px;
+    }
+
+    .hotrocket-age-gate-modal.hotrocket-popup-size-medium {
+        padding: 34px 22px;
+    }
+
+    .hotrocket-age-gate-modal.hotrocket-popup-size-large {
+        padding: 40px 24px;
     }
 
     .hotrocket-age-gate-modal h2 {
@@ -256,7 +267,15 @@
 }
 
 @media (max-width: 400px) {
-    .hotrocket-age-gate-modal {
+    .hotrocket-age-gate-modal.hotrocket-popup-size-small {
+        padding: 24px 18px;
+    }
+
+    .hotrocket-age-gate-modal.hotrocket-popup-size-medium {
+        padding: 28px 19px;
+    }
+
+    .hotrocket-age-gate-modal.hotrocket-popup-size-large {
         padding: 32px 20px;
     }
 
@@ -269,7 +288,104 @@
     }
 }
 
+/* Date Input Fields */
+.hotrocket-age-gate-date-input {
+    margin-bottom: 24px;
+}
+
+.hotrocket-age-gate-date-fields {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+}
+
+.hotrocket-age-gate-date-field {
+    flex: 1;
+    max-width: 120px;
+}
+
+.hotrocket-age-gate-date-field label {
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 6px;
+    color: #666666;
+}
+
+.hotrocket-age-gate-date-field input {
+    width: 100%;
+    padding: 10px;
+    font-size: 15px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    text-align: center;
+    transition: border-color 0.3s ease;
+}
+
+.hotrocket-age-gate-date-field input:focus {
+    outline: none;
+    border-color: #722f37;
+}
+
+.hotrocket-age-gate-date-error {
+    color: #d32f2f;
+    font-size: 14px;
+    margin-top: 10px;
+    font-weight: 500;
+}
+
+/* Legal Note */
+.hotrocket-age-gate-legal-note {
+    font-size: 12px;
+    color: #999999;
+    margin: 0;
+    line-height: 1.6;
+    padding: 16px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    border: 1px solid #e0e0e0;
+}
+
+.hotrocket-age-gate-legal-note p {
+    margin: 0 0 8px 0;
+}
+
+.hotrocket-age-gate-legal-note p:last-child {
+    margin-bottom: 0;
+}
+
 /* Prevent body scroll when age gate is active */
 body.hotrocket-age-gate-active {
     overflow: hidden;
+}
+
+/* Responsive Date Inputs */
+@media (max-width: 600px) {
+    .hotrocket-age-gate-date-fields {
+        gap: 8px;
+    }
+
+    .hotrocket-age-gate-date-field {
+        max-width: 100px;
+    }
+
+    .hotrocket-age-gate-date-field input {
+        padding: 8px;
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 400px) {
+    .hotrocket-age-gate-date-field {
+        max-width: 80px;
+    }
+
+    .hotrocket-age-gate-date-field label {
+        font-size: 12px;
+    }
+
+    .hotrocket-age-gate-date-field input {
+        padding: 6px;
+        font-size: 13px;
+    }
 }

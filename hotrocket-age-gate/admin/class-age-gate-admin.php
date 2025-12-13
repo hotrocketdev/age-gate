@@ -20,11 +20,11 @@ class HotRocket_Age_Gate_Admin {
     }
 
     public static function register_settings() {
-        register_setting('hotrocket_age_gate_settings', 'hotrocket_age_gate_options', array(__CLASS__, 'sanitize_options'));
+        register_setting('HotRocket_Age_Gate_settings', 'hotrocket_age_gate_options', array(__CLASS__, 'sanitize_options'));
 
         // General Settings Section
         add_settings_section(
-            'hotrocket_age_gate_general',
+            'HotRocket_Age_Gate_general',
             'General Settings',
             array(__CLASS__, 'general_section_callback'),
             'hotrocket-age-gate'
@@ -32,7 +32,7 @@ class HotRocket_Age_Gate_Admin {
 
         // Content Settings Section
         add_settings_section(
-            'hotrocket_age_gate_content',
+            'HotRocket_Age_Gate_content',
             'Content Settings',
             array(__CLASS__, 'content_section_callback'),
             'hotrocket-age-gate'
@@ -40,35 +40,52 @@ class HotRocket_Age_Gate_Admin {
 
         // Design Settings Section
         add_settings_section(
-            'hotrocket_age_gate_design',
-            'Design & Appearance',
+            'HotRocket_Age_Gate_design',
+            __('Design & Appearance', 'hotrocket-age-gate'),
             array(__CLASS__, 'design_section_callback'),
             'hotrocket-age-gate'
         );
 
+        // Advanced Settings Section
+        add_settings_section(
+            'HotRocket_Age_Gate_advanced',
+            __('Advanced Settings', 'hotrocket-age-gate'),
+            array(__CLASS__, 'advanced_section_callback'),
+            'hotrocket-age-gate'
+        );
+
         // General Settings Fields
-        add_settings_field('enabled', 'Enable Age Gate', array(__CLASS__, 'enabled_callback'), 'hotrocket-age-gate', 'hotrocket_age_gate_general');
-        add_settings_field('age_limit', 'Age Limit', array(__CLASS__, 'age_limit_callback'), 'hotrocket-age-gate', 'hotrocket_age_gate_general');
-        add_settings_field('cookie_duration', 'Cookie Duration (Days)', array(__CLASS__, 'cookie_duration_callback'), 'hotrocket-age-gate', 'hotrocket_age_gate_general');
-        add_settings_field('redirect_url', 'Redirect URL (on "No")', array(__CLASS__, 'redirect_url_callback'), 'hotrocket-age-gate', 'hotrocket_age_gate_general');
-        add_settings_field('show_remember', 'Show "Remember Me"', array(__CLASS__, 'show_remember_callback'), 'hotrocket-age-gate', 'hotrocket_age_gate_general');
+        add_settings_field('enabled', __('Enable Age Gate', 'hotrocket-age-gate'), array(__CLASS__, 'enabled_callback'), 'hotrocket-age-gate', 'HotRocket_Age_Gate_general');
+        add_settings_field('age_limit', __('Age Limit', 'hotrocket-age-gate'), array(__CLASS__, 'age_limit_callback'), 'hotrocket-age-gate', 'HotRocket_Age_Gate_general');
+        add_settings_field('cookie_duration', __('Cookie Duration (Days)', 'hotrocket-age-gate'), array(__CLASS__, 'cookie_duration_callback'), 'hotrocket-age-gate', 'HotRocket_Age_Gate_general');
+        add_settings_field('redirect_url', __('Redirect URL (on "No")', 'hotrocket-age-gate'), array(__CLASS__, 'redirect_url_callback'), 'hotrocket-age-gate', 'HotRocket_Age_Gate_general');
+        add_settings_field('show_remember', __('Show "Remember Me"', 'hotrocket-age-gate'), array(__CLASS__, 'show_remember_callback'), 'hotrocket-age-gate', 'HotRocket_Age_Gate_general');
 
         // Content Settings Fields
-        add_settings_field('welcome_title', 'Welcome Title', array(__CLASS__, 'welcome_title_callback'), 'hotrocket-age-gate', 'hotrocket_age_gate_content');
-        add_settings_field('welcome_message', 'Welcome Message', array(__CLASS__, 'welcome_message_callback'), 'hotrocket-age-gate', 'hotrocket_age_gate_content');
-        add_settings_field('button_yes_text', 'Yes Button Text', array(__CLASS__, 'button_yes_text_callback'), 'hotrocket-age-gate', 'hotrocket_age_gate_content');
-        add_settings_field('button_no_text', 'No Button Text', array(__CLASS__, 'button_no_text_callback'), 'hotrocket-age-gate', 'hotrocket_age_gate_content');
+        add_settings_field('welcome_title', __('Welcome Title', 'hotrocket-age-gate'), array(__CLASS__, 'welcome_title_callback'), 'hotrocket-age-gate', 'HotRocket_Age_Gate_content');
+        add_settings_field('welcome_message', __('Welcome Message', 'hotrocket-age-gate'), array(__CLASS__, 'welcome_message_callback'), 'hotrocket-age-gate', 'HotRocket_Age_Gate_content');
+        add_settings_field('button_yes_text', __('Yes Button Text', 'hotrocket-age-gate'), array(__CLASS__, 'button_yes_text_callback'), 'hotrocket-age-gate', 'HotRocket_Age_Gate_content');
+        add_settings_field('button_no_text', __('No Button Text', 'hotrocket-age-gate'), array(__CLASS__, 'button_no_text_callback'), 'hotrocket-age-gate', 'HotRocket_Age_Gate_content');
+        add_settings_field('legal_note', __('Legal Note', 'hotrocket-age-gate'), array(__CLASS__, 'legal_note_callback'), 'hotrocket-age-gate', 'HotRocket_Age_Gate_content');
 
         // Design Settings Fields
-        add_settings_field('custom_logo', 'Custom Logo/Icon', array(__CLASS__, 'custom_logo_callback'), 'hotrocket-age-gate', 'hotrocket_age_gate_design');
-        add_settings_field('logo_size', 'Logo/Icon Size', array(__CLASS__, 'logo_size_callback'), 'hotrocket-age-gate', 'hotrocket_age_gate_design');
-        add_settings_field('popup_size', 'Popup Window Size', array(__CLASS__, 'popup_size_callback'), 'hotrocket-age-gate', 'hotrocket_age_gate_design');
-        add_settings_field('overlay_opacity', 'Overlay Transparency', array(__CLASS__, 'overlay_opacity_callback'), 'hotrocket-age-gate', 'hotrocket_age_gate_design');
-        add_settings_field('overlay_color', 'Overlay Color', array(__CLASS__, 'overlay_color_callback'), 'hotrocket-age-gate', 'hotrocket_age_gate_design');
-        add_settings_field('popup_bg_color', 'Popup Background Color', array(__CLASS__, 'popup_bg_color_callback'), 'hotrocket-age-gate', 'hotrocket_age_gate_design');
-        add_settings_field('primary_color', 'Primary Button Color', array(__CLASS__, 'primary_color_callback'), 'hotrocket-age-gate', 'hotrocket_age_gate_design');
-        add_settings_field('text_color', 'Text Color', array(__CLASS__, 'text_color_callback'), 'hotrocket-age-gate', 'hotrocket_age_gate_design');
-        add_settings_field('button_text_color', 'Button Text Color', array(__CLASS__, 'button_text_color_callback'), 'hotrocket-age-gate', 'hotrocket_age_gate_design');
+        add_settings_field('custom_logo', __('Custom Logo/Icon', 'hotrocket-age-gate'), array(__CLASS__, 'custom_logo_callback'), 'hotrocket-age-gate', 'HotRocket_Age_Gate_design');
+        add_settings_field('logo_size', __('Logo/Icon Size', 'hotrocket-age-gate'), array(__CLASS__, 'logo_size_callback'), 'hotrocket-age-gate', 'HotRocket_Age_Gate_design');
+        add_settings_field('popup_size', __('Popup Size', 'hotrocket-age-gate'), array(__CLASS__, 'popup_size_callback'), 'hotrocket-age-gate', 'HotRocket_Age_Gate_design');
+        add_settings_field('overlay_opacity', __('Overlay Transparency', 'hotrocket-age-gate'), array(__CLASS__, 'overlay_opacity_callback'), 'hotrocket-age-gate', 'HotRocket_Age_Gate_design');
+        add_settings_field('overlay_color', 'Overlay Color', array(__CLASS__, 'overlay_color_callback'), 'hotrocket-age-gate', 'HotRocket_Age_Gate_design');
+        add_settings_field('popup_bg_color', __('Popup Background Color', 'hotrocket-age-gate'), array(__CLASS__, 'popup_bg_color_callback'), 'hotrocket-age-gate', 'HotRocket_Age_Gate_design');
+        add_settings_field('primary_color', __('Primary Button Color', 'hotrocket-age-gate'), array(__CLASS__, 'primary_color_callback'), 'hotrocket-age-gate', 'HotRocket_Age_Gate_design');
+        add_settings_field('text_color', __('Text Color', 'hotrocket-age-gate'), array(__CLASS__, 'text_color_callback'), 'hotrocket-age-gate', 'HotRocket_Age_Gate_design');
+        add_settings_field('button_text_color', __('Button Text Color', 'hotrocket-age-gate'), array(__CLASS__, 'button_text_color_callback'), 'hotrocket-age-gate', 'HotRocket_Age_Gate_design');
+
+        // Advanced Settings Fields
+        add_settings_field('restriction_mode', __('Restriction Mode', 'hotrocket-age-gate'), array(__CLASS__, 'restriction_mode_callback'), 'hotrocket-age-gate', 'HotRocket_Age_Gate_advanced');
+        add_settings_field('verification_method', __('Verification Method', 'hotrocket-age-gate'), array(__CLASS__, 'verification_method_callback'), 'hotrocket-age-gate', 'HotRocket_Age_Gate_advanced');
+        add_settings_field('date_format', __('Date Format', 'hotrocket-age-gate'), array(__CLASS__, 'date_format_callback'), 'hotrocket-age-gate', 'HotRocket_Age_Gate_advanced');
+        add_settings_field('skip_logged_in', __('Skip Logged-In Users', 'hotrocket-age-gate'), array(__CLASS__, 'skip_logged_in_callback'), 'hotrocket-age-gate', 'HotRocket_Age_Gate_advanced');
+        add_settings_field('custom_user_agents', __('Custom Bot User Agents', 'hotrocket-age-gate'), array(__CLASS__, 'custom_user_agents_callback'), 'hotrocket-age-gate', 'HotRocket_Age_Gate_advanced');
+        add_settings_field('disable_caching', __('Disable Caching', 'hotrocket-age-gate'), array(__CLASS__, 'disable_caching_callback'), 'hotrocket-age-gate', 'HotRocket_Age_Gate_advanced');
     }
 
     public static function sanitize_options($input) {
@@ -80,6 +97,7 @@ class HotRocket_Age_Gate_Admin {
         $sanitized['welcome_message'] = !empty($input['welcome_message']) ? sanitize_textarea_field($input['welcome_message']) : '';
         $sanitized['button_yes_text'] = !empty($input['button_yes_text']) ? sanitize_text_field($input['button_yes_text']) : '';
         $sanitized['button_no_text'] = !empty($input['button_no_text']) ? sanitize_text_field($input['button_no_text']) : '';
+        $sanitized['legal_note'] = !empty($input['legal_note']) ? wp_kses_post($input['legal_note']) : '';
         $sanitized['cookie_duration'] = !empty($input['cookie_duration']) ? intval($input['cookie_duration']) : 30;
         $sanitized['redirect_url'] = !empty($input['redirect_url']) ? esc_url_raw($input['redirect_url']) : '';
         $sanitized['show_remember'] = !empty($input['show_remember']) ? 1 : 0;
@@ -98,6 +116,20 @@ class HotRocket_Age_Gate_Admin {
         // Validate popup size - only allow small, medium, large
         $sanitized['popup_size'] = !empty($input['popup_size']) && in_array($input['popup_size'], $allowed_sizes) ? $input['popup_size'] : 'large';
 
+        // Advanced settings
+        $allowed_restriction_modes = array('entire_site', 'selected_content');
+        $sanitized['restriction_mode'] = !empty($input['restriction_mode']) && in_array($input['restriction_mode'], $allowed_restriction_modes) ? $input['restriction_mode'] : 'entire_site';
+
+        $allowed_verification_methods = array('simple', 'date_input');
+        $sanitized['verification_method'] = !empty($input['verification_method']) && in_array($input['verification_method'], $allowed_verification_methods) ? $input['verification_method'] : 'simple';
+
+        $allowed_date_formats = array('DD/MM/YYYY', 'MM/DD/YYYY', 'YYYY/MM/DD');
+        $sanitized['date_format'] = !empty($input['date_format']) && in_array($input['date_format'], $allowed_date_formats) ? $input['date_format'] : 'DD/MM/YYYY';
+
+        $sanitized['skip_logged_in'] = !empty($input['skip_logged_in']) ? 1 : 0;
+        $sanitized['custom_user_agents'] = !empty($input['custom_user_agents']) ? sanitize_textarea_field($input['custom_user_agents']) : '';
+        $sanitized['disable_caching'] = !empty($input['disable_caching']) ? 1 : 0;
+
         return $sanitized;
     }
 
@@ -111,7 +143,11 @@ class HotRocket_Age_Gate_Admin {
     }
 
     public static function design_section_callback() {
-        echo '<p>Customize the visual appearance and colors of the age gate popup.</p>';
+        echo '<p>' . __('Customize the visual appearance and colors of the age gate popup.', 'hotrocket-age-gate') . '</p>';
+    }
+
+    public static function advanced_section_callback() {
+        echo '<p>' . __('Advanced features including bot detection, restriction modes, and verification methods.', 'hotrocket-age-gate') . '</p>';
     }
 
     // Field Callbacks
@@ -130,7 +166,7 @@ class HotRocket_Age_Gate_Admin {
 
     public static function welcome_title_callback() {
         $options = get_option('hotrocket_age_gate_options');
-        $value = !empty($options['welcome_title']) ? esc_attr($options['welcome_title']) : 'Welcome to our site';
+        $value = !empty($options['welcome_title']) ? esc_attr($options['welcome_title']) : 'Welcome to Vin\'s Winery wine shop';
         echo '<input type="text" name="hotrocket_age_gate_options[welcome_title]" value="' . $value . '" class="regular-text">';
     }
 
@@ -176,22 +212,22 @@ class HotRocket_Age_Gate_Admin {
         $options = get_option('hotrocket_age_gate_options');
         $logo_url = !empty($options['custom_logo']) ? esc_url($options['custom_logo']) : '';
         ?>
-        <div class="hotrocket-logo-upload-wrapper">
+        <div class="vins-logo-upload-wrapper">
             <input type="hidden" name="hotrocket_age_gate_options[custom_logo]" id="vins_custom_logo" value="<?php echo $logo_url; ?>">
-            <div class="hotrocket-logo-preview">
+            <div class="vins-logo-preview">
                 <?php if ($logo_url): ?>
                     <img src="<?php echo $logo_url; ?>" alt="Custom Logo" style="max-width: 150px; max-height: 150px; display: block; margin-bottom: 10px;">
                 <?php else: ?>
-                    <div class="hotrocket-logo-placeholder" style="width: 150px; height: 150px; border: 2px dashed #ddd; display: flex; align-items: center; justify-content: center; margin-bottom: 10px; border-radius: 8px;">
+                    <div class="vins-logo-placeholder" style="width: 150px; height: 150px; border: 2px dashed #ddd; display: flex; align-items: center; justify-content: center; margin-bottom: 10px; border-radius: 8px;">
                         <span style="color: #999;">No logo selected</span>
                     </div>
                 <?php endif; ?>
             </div>
-            <button type="button" class="button button-secondary hotrocket-upload-logo-btn">
+            <button type="button" class="button button-secondary vins-upload-logo-btn">
                 <?php echo $logo_url ? 'Change Logo' : 'Upload Logo'; ?>
             </button>
             <?php if ($logo_url): ?>
-                <button type="button" class="button button-link-delete hotrocket-remove-logo-btn" style="margin-left: 10px;">Remove Logo</button>
+                <button type="button" class="button button-link-delete vins-remove-logo-btn" style="margin-left: 10px;">Remove Logo</button>
             <?php endif; ?>
             <p class="description">Upload a custom logo or icon to display at the top of the age gate popup. Leave empty to use the default wine glass icon. Recommended size: 150x150px or smaller.</p>
         </div>
@@ -216,60 +252,132 @@ class HotRocket_Age_Gate_Admin {
         $current_size = !empty($options['popup_size']) ? esc_attr($options['popup_size']) : 'large';
         ?>
         <select name="hotrocket_age_gate_options[popup_size]" class="regular-text">
-            <option value="small" <?php selected($current_size, 'small'); ?>>Small (320px)</option>
-            <option value="medium" <?php selected($current_size, 'medium'); ?>>Medium (400px)</option>
+            <option value="small" <?php selected($current_size, 'small'); ?>>Small (350px)</option>
+            <option value="medium" <?php selected($current_size, 'medium'); ?>>Medium (420px)</option>
             <option value="large" <?php selected($current_size, 'large'); ?>>Large (500px)</option>
         </select>
-        <p class="description">Choose the size of the popup window itself</p>
+        <p class="description">Choose the size of the popup modal</p>
         <?php
     }
 
     public static function overlay_opacity_callback() {
         $options = get_option('hotrocket_age_gate_options');
         $value = !empty($options['overlay_opacity']) ? intval($options['overlay_opacity']) : 95;
-        echo '<input type="range" name="hotrocket_age_gate_options[overlay_opacity]" value="' . esc_attr($value) . '" min="0" max="100" step="5" class="hotrocket-range-slider" oninput="this.nextElementSibling.textContent = this.value + \'%\'">';
-        echo '<span class="hotrocket-range-value">' . $value . '%</span>';
+        echo '<input type="range" name="hotrocket_age_gate_options[overlay_opacity]" value="' . esc_attr($value) . '" min="0" max="100" step="5" class="vins-range-slider" oninput="this.nextElementSibling.textContent = this.value + \'%\'">';
+        echo '<span class="vins-range-value">' . $value . '%</span>';
         echo '<p class="description">0% = fully transparent, 100% = fully opaque</p>';
     }
 
     public static function overlay_color_callback() {
         $options = get_option('hotrocket_age_gate_options');
         $value = !empty($options['overlay_color']) ? esc_attr($options['overlay_color']) : '#000000';
-        echo '<input type="color" name="hotrocket_age_gate_options[overlay_color]" value="' . $value . '" class="hotrocket-color-picker">';
-        echo '<input type="text" value="' . $value . '" class="regular-text hotrocket-color-text" readonly>';
+        echo '<input type="color" name="hotrocket_age_gate_options[overlay_color]" value="' . $value . '" class="vins-color-picker">';
+        echo '<input type="text" value="' . $value . '" class="regular-text vins-color-text" readonly>';
         echo '<p class="description">Background overlay color behind the popup</p>';
     }
 
     public static function popup_bg_color_callback() {
         $options = get_option('hotrocket_age_gate_options');
         $value = !empty($options['popup_bg_color']) ? esc_attr($options['popup_bg_color']) : '#ffffff';
-        echo '<input type="color" name="hotrocket_age_gate_options[popup_bg_color]" value="' . $value . '" class="hotrocket-color-picker">';
-        echo '<input type="text" value="' . $value . '" class="regular-text hotrocket-color-text" readonly>';
+        echo '<input type="color" name="hotrocket_age_gate_options[popup_bg_color]" value="' . $value . '" class="vins-color-picker">';
+        echo '<input type="text" value="' . $value . '" class="regular-text vins-color-text" readonly>';
         echo '<p class="description">Background color of the popup modal</p>';
     }
 
     public static function primary_color_callback() {
         $options = get_option('hotrocket_age_gate_options');
-        $value = !empty($options['primary_color']) ? esc_attr($options['primary_color']) : '#ff6b35';
-        echo '<input type="color" name="hotrocket_age_gate_options[primary_color]" value="' . $value . '" class="hotrocket-color-picker">';
-        echo '<input type="text" value="' . $value . '" class="regular-text hotrocket-color-text" readonly>';
+        $value = !empty($options['primary_color']) ? esc_attr($options['primary_color']) : '#722f37';
+        echo '<input type="color" name="hotrocket_age_gate_options[primary_color]" value="' . $value . '" class="vins-color-picker">';
+        echo '<input type="text" value="' . $value . '" class="regular-text vins-color-text" readonly>';
         echo '<p class="description">Color of the "Yes" button</p>';
     }
 
     public static function text_color_callback() {
         $options = get_option('hotrocket_age_gate_options');
         $value = !empty($options['text_color']) ? esc_attr($options['text_color']) : '#333333';
-        echo '<input type="color" name="hotrocket_age_gate_options[text_color]" value="' . $value . '" class="hotrocket-color-picker">';
-        echo '<input type="text" value="' . $value . '" class="regular-text hotrocket-color-text" readonly>';
+        echo '<input type="color" name="hotrocket_age_gate_options[text_color]" value="' . $value . '" class="vins-color-picker">';
+        echo '<input type="text" value="' . $value . '" class="regular-text vins-color-text" readonly>';
         echo '<p class="description">Main text color in the popup</p>';
     }
 
     public static function button_text_color_callback() {
         $options = get_option('hotrocket_age_gate_options');
         $value = !empty($options['button_text_color']) ? esc_attr($options['button_text_color']) : '#ffffff';
-        echo '<input type="color" name="hotrocket_age_gate_options[button_text_color]" value="' . $value . '" class="hotrocket-color-picker">';
-        echo '<input type="text" value="' . $value . '" class="regular-text hotrocket-color-text" readonly>';
-        echo '<p class="description">Text color on the "Yes" button</p>';
+        echo '<input type="color" name="hotrocket_age_gate_options[button_text_color]" value="' . $value . '" class="vins-color-picker">';
+        echo '<input type="text" value="' . $value . '" class="regular-text vins-color-text" readonly>';
+        echo '<p class="description">' . __('Text color on the "Yes" button', 'hotrocket-age-gate') . '</p>';
+    }
+
+    // Advanced Settings Callbacks
+    public static function legal_note_callback() {
+        $options = get_option('hotrocket_age_gate_options');
+        $value = !empty($options['legal_note']) ? esc_textarea($options['legal_note']) : '';
+        echo '<textarea name="hotrocket_age_gate_options[legal_note]" rows="4" class="large-text">' . $value . '</textarea>';
+        echo '<p class="description">' . __('Optional legal note or information to display at the bottom of the age gate. HTML allowed.', 'hotrocket-age-gate') . '</p>';
+    }
+
+    public static function restriction_mode_callback() {
+        $options = get_option('hotrocket_age_gate_options');
+        $current_mode = !empty($options['restriction_mode']) ? esc_attr($options['restriction_mode']) : 'entire_site';
+        ?>
+        <select name="hotrocket_age_gate_options[restriction_mode]" class="regular-text">
+            <option value="entire_site" <?php selected($current_mode, 'entire_site'); ?>><?php _e('Entire Site', 'hotrocket-age-gate'); ?></option>
+            <option value="selected_content" <?php selected($current_mode, 'selected_content'); ?>><?php _e('Selected Content Only', 'hotrocket-age-gate'); ?></option>
+        </select>
+        <p class="description">
+            <?php _e('<strong>Entire Site:</strong> Show age gate on all pages (you can exclude specific content).<br><strong>Selected Content:</strong> Only show on content you specifically mark for age verification.', 'hotrocket-age-gate'); ?>
+        </p>
+        <?php
+    }
+
+    public static function verification_method_callback() {
+        $options = get_option('hotrocket_age_gate_options');
+        $current_method = !empty($options['verification_method']) ? esc_attr($options['verification_method']) : 'simple';
+        ?>
+        <select name="hotrocket_age_gate_options[verification_method]" class="regular-text">
+            <option value="simple" <?php selected($current_method, 'simple'); ?>><?php _e('Simple Yes/No Buttons', 'hotrocket-age-gate'); ?></option>
+            <option value="date_input" <?php selected($current_method, 'date_input'); ?>><?php _e('Date of Birth Input', 'hotrocket-age-gate'); ?></option>
+        </select>
+        <p class="description">
+            <?php _e('<strong>Simple:</strong> Users click Yes or No.<br><strong>Date Input:</strong> Users enter their date of birth for verification.', 'hotrocket-age-gate'); ?>
+        </p>
+        <?php
+    }
+
+    public static function date_format_callback() {
+        $options = get_option('hotrocket_age_gate_options');
+        $current_format = !empty($options['date_format']) ? esc_attr($options['date_format']) : 'DD/MM/YYYY';
+        ?>
+        <select name="hotrocket_age_gate_options[date_format]" class="regular-text">
+            <option value="DD/MM/YYYY" <?php selected($current_format, 'DD/MM/YYYY'); ?>>DD/MM/YYYY (<?php _e('Day/Month/Year', 'hotrocket-age-gate'); ?>)</option>
+            <option value="MM/DD/YYYY" <?php selected($current_format, 'MM/DD/YYYY'); ?>>MM/DD/YYYY (<?php _e('Month/Day/Year', 'hotrocket-age-gate'); ?>)</option>
+            <option value="YYYY/MM/DD" <?php selected($current_format, 'YYYY/MM/DD'); ?>>YYYY/MM/DD (<?php _e('Year/Month/Day', 'hotrocket-age-gate'); ?>)</option>
+        </select>
+        <p class="description">
+            <?php _e('Choose the date input order based on your region. Only applies when using Date of Birth verification method.', 'hotrocket-age-gate'); ?>
+        </p>
+        <?php
+    }
+
+    public static function skip_logged_in_callback() {
+        $options = get_option('hotrocket_age_gate_options');
+        $checked = !empty($options['skip_logged_in']) ? 'checked' : '';
+        echo '<label><input type="checkbox" name="hotrocket_age_gate_options[skip_logged_in]" value="1" ' . $checked . '> ' . __('Skip age verification for logged-in users', 'hotrocket-age-gate') . '</label>';
+        echo '<p class="description">' . __('If enabled, users who are logged into WordPress will not see the age gate.', 'hotrocket-age-gate') . '</p>';
+    }
+
+    public static function custom_user_agents_callback() {
+        $options = get_option('hotrocket_age_gate_options');
+        $value = !empty($options['custom_user_agents']) ? esc_textarea($options['custom_user_agents']) : '';
+        echo '<textarea name="hotrocket_age_gate_options[custom_user_agents]" rows="5" class="large-text" placeholder="' . __('bot1, bot2, crawler3', 'hotrocket-age-gate') . '">' . $value . '</textarea>';
+        echo '<p class="description">' . __('Add custom bot user agents (comma or line-separated) to skip age verification. Common bots like Googlebot, Bingbot, etc. are already included for SEO.', 'hotrocket-age-gate') . '</p>';
+    }
+
+    public static function disable_caching_callback() {
+        $options = get_option('hotrocket_age_gate_options');
+        $checked = !empty($options['disable_caching']) ? 'checked' : '';
+        echo '<label><input type="checkbox" name="hotrocket_age_gate_options[disable_caching]" value="1" ' . $checked . '> ' . __('Disable caching for age gate', 'hotrocket-age-gate') . '</label>';
+        echo '<p class="description">' . __('Enable this if you\'re having issues with caching plugins. This adds no-cache headers and cache-busting to assets.', 'hotrocket-age-gate') . '</p>';
     }
 
     public static function render_settings_page() {
@@ -288,14 +396,14 @@ class HotRocket_Age_Gate_Admin {
             <h1><?php echo esc_html(get_admin_page_title()); ?></h1>
 
             <div class="hotrocket-age-gate-admin-header">
-                <p class="description">Configure your age verification popup. Customize the appearance, messaging, and behavior to match your brand.</p>
+                <p class="description">Configure your age verification popup for HotRocket. Customize the appearance, messaging, and behavior to match your brand.</p>
             </div>
 
             <?php settings_errors('hotrocket_age_gate_options'); ?>
 
             <form action="options.php" method="post">
                 <?php
-                settings_fields('hotrocket_age_gate_settings');
+                settings_fields('HotRocket_Age_Gate_settings');
                 do_settings_sections('hotrocket-age-gate');
                 submit_button('Save Settings');
                 ?>
@@ -408,7 +516,7 @@ class HotRocket_Age_Gate_Admin {
                         var attachment = mediaUploader.state().get('selection').first().toJSON();
 
                         // Set the value of the hidden input
-                        $('#vins_custom_logo').val(attachment.url);
+                        $('#hotrocket_custom_logo').val(attachment.url);
 
                         // Update the preview
                         $('.hotrocket-logo-preview').html('<img src="' + attachment.url + '" alt="Custom Logo" style="max-width: 150px; max-height: 150px; display: block; margin-bottom: 10px;">');
@@ -418,7 +526,7 @@ class HotRocket_Age_Gate_Admin {
 
                         // Add remove button if it doesn't exist
                         if (!$('.hotrocket-remove-logo-btn').length) {
-                            $('.hotrocket-upload-logo-btn').after('<button type="button" class="button button-link-delete hotrocket-remove-logo-btn" style="margin-left: 10px;">Remove Logo</button>');
+                            $('.hotrocket-upload-logo-btn').after('<button type="button" class="button button-link-delete vins-remove-logo-btn" style="margin-left: 10px;">Remove Logo</button>');
                         }
                     });
 
@@ -431,10 +539,10 @@ class HotRocket_Age_Gate_Admin {
                     e.preventDefault();
 
                     // Clear the hidden input
-                    $('#vins_custom_logo').val('');
+                    $('#hotrocket_custom_logo').val('');
 
                     // Reset the preview
-                    $('.hotrocket-logo-preview').html('<div class="hotrocket-logo-placeholder" style="width: 150px; height: 150px; border: 2px dashed #ddd; display: flex; align-items: center; justify-content: center; margin-bottom: 10px; border-radius: 8px;"><span style="color: #999;">No logo selected</span></div>');
+                    $('.hotrocket-logo-preview').html('<div class="vins-logo-placeholder" style="width: 150px; height: 150px; border: 2px dashed #ddd; display: flex; align-items: center; justify-content: center; margin-bottom: 10px; border-radius: 8px;"><span style="color: #999;">No logo selected</span></div>');
 
                     // Update button text
                     $('.hotrocket-upload-logo-btn').text('Upload Logo');
